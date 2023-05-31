@@ -1,0 +1,125 @@
+@use 'base' as *; /* = @import 'base';*/
+
+@use 'lib1' as l1; // RED
+@use 'lib2' as l2; // BLUE
+
+h2 {
+    color: l1.$text-color;
+    text-align: center;
+}
+
+/* SCSS Variables */
+/* Syntax 
+   
+   $identifer: value;
+   $my-variable: value;
+
+   IMP: identifers should be written in kebab cases
+*/
+$my-text-color: rgb(0, 51, 128);
+
+$something: color;
+$selector: h1;
+
+/* Text Interpolation Binding Syntax */
+#{$selector} {
+    $gutter: 10px;  /* SCSS Variables */
+
+    /* Text Interpolation Binding Syntax */
+    #{$something}: $my-text-color;
+    background-color: $my-background-color;
+    margin: $gutter;
+    padding: $gutter;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Comments in CSS */
+// Comments in SCSS
+
+/* Inhertiance in SCSS */
+/* Syntax 
+   
+   @extend placeholder;
+*/
+#p1 {
+    @extend h1;
+    // We can override inherited styles if we want
+    color: black;   
+}
+
+/* Placeholder selector (%) */
+
+%my-placholder {
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    border-radius: 5px;
+}
+
+#outer-1 {
+    border: 1px solid lightseagreen;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+    /* SCSS Nested CSS Rules */
+    div {
+        @extend %my-placholder;
+
+        /* Parent Referecing (&) */
+        &:hover {
+           background-color: red; 
+        }
+    }
+}
+
+#outer-2 {
+    /* Nested styles are also inherited */
+    @extend #outer-1;
+}
+
+/* Mixins (Mix-in) */
+
+#outer-3 {
+    border: 1px solid black;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    div:first-child {
+        @include my-mixin(red, 100px, 150px, none);
+    }
+
+    div:nth-child(2) {
+        @include my-mixin(blue, 50px, 50px, 20px);
+    }
+    
+    div:nth-child(3){
+        @include my-mixin(green, 100px, 100px, 5px);
+    }
+
+    div:last-child {
+        @include my-mixin(black, 125px, 100px, 50%);
+    }
+}
+
+#outer-4 {
+    height: 200px;
+    width: 200px;
+    background-color: lightgreen;
+    margin: 10px auto;
+    position: relative;
+
+    div {
+        $size: 75px;
+        width: $size;
+        height: $size;
+        background-color: purple;
+        position: absolute;
+        left: center(200px, $size);
+        top: center(200px, $size);
+    }
+}

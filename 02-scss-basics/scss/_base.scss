@@ -1,0 +1,23 @@
+/* These are called partials */
+
+/* To create private members start the identifer with
+    - (hypen)
+    _ (underscore)
+*/
+
+$my-background-color: lightgray;
+
+@mixin my-mixin($bg, $width, $height, $br){
+    background-color: $bg;
+    width: $width;
+    height: $height;
+    border-radius: $br;
+}
+
+@function _private-center($parent-size, $size){
+    @return ($parent-size / 2) - ($size / 2);
+}
+
+@function center($parent-size, $size){
+    @return _private-center($parent-size, $size);
+}
