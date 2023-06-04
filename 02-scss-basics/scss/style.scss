@@ -3,9 +3,23 @@
 @use 'lib1' as l1; // RED
 @use 'lib2' as l2; // BLUE
 
+h3 {
+    font-size: 2rem;
+    text-align: center;
+
+    @media screen and (max-width: 600px) {
+        background-color: orangered;
+    }
+}
+
 h2 {
     color: l1.$text-color;
     text-align: center;
+
+    @media screen and (max-width: 1200px){
+        background-color: yellowgreen;
+    }
+    
 }
 
 /* SCSS Variables */
